@@ -1,5 +1,6 @@
 import { Project } from "@/types/Project";
 import { createClient, groq } from "next-sanity";
+import next from "next/types";
 
 export const getProjects = async (): Promise<Project[]> => {
     const client = createClient({
@@ -9,6 +10,8 @@ export const getProjects = async (): Promise<Project[]> => {
         useCdn: false
     });
 
+    console.log('Chamou o fetch...!');
+    
     return client.fetch(
         groq`*[_type == "project"]{
             _id, 
@@ -18,6 +21,6 @@ export const getProjects = async (): Promise<Project[]> => {
             "image": image.asset->url,
             url,
             content
-        }`
+        }`, { catch: 'no-store'}
     );
 }
