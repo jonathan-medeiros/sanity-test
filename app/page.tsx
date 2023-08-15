@@ -1,3 +1,4 @@
+"use client"
 
 import { getProjects } from "@/sanity/sanity-utils"
 
