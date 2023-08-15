@@ -1,11 +1,12 @@
 import { Project } from "@/types/Project";
 import { createClient, groq } from "next-sanity";
+import { cache } from "react";
 
 export const getProjects = async (): Promise<Project[]> => {
     const client = createClient({
         projectId: "mm97wo51",
         dataset: "production",
-        apiVersion: "2023-03-04",
+        apiVersion: "2023-08-15",
         useCdn: false
     });
 
@@ -18,6 +19,6 @@ export const getProjects = async (): Promise<Project[]> => {
             "image": image.asset->url,
             url,
             content
-        }`
+        }`, { cache: 'no-store' }
     );
 }
