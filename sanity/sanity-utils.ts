@@ -19,6 +19,18 @@ export const getProjects = async (): Promise<Project[]> => {
             "image": image.asset->url,
             url,
             content
-        }`, { cache: 'no-store' }
+        }`
     );
+
+    // return client.fetch(
+    //     groq`*[_type == "project"]{
+    //         _id, 
+    //         _createdAt,
+    //         name,
+    //         "slug": slug.current,
+    //         "image": image.asset->url,
+    //         url,
+    //         content
+    //     }`, { cache: 'no-store' }
+    // );
 }
