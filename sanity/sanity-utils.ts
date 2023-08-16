@@ -5,7 +5,7 @@ import clientConfig from './config/client-config';
 
 export const getProjects = async (): Promise<Project[]> => {
 
-    return createClient(clientConfig).fetch(
+    return await createClient(clientConfig).fetch(
         groq`*[_type == "project"]{
             _id, 
             _createdAt,
@@ -20,7 +20,7 @@ export const getProjects = async (): Promise<Project[]> => {
 
 export const getProject = async (slug: string): Promise<Project> => {
     
-    return createClient(clientConfig).fetch(
+    return await createClient(clientConfig).fetch(
         groq`*[_type == "project" && slug.current == $slug][0]{
             _id, 
             _createdAt,
@@ -35,7 +35,7 @@ export const getProject = async (slug: string): Promise<Project> => {
 }
 
 export const getPages = async (): Promise<Page[]> => {
-    return createClient(clientConfig).fetch(
+    return await createClient(clientConfig).fetch(
         groq`*[_type == "page"]{
             _id,
             _createdAt,
@@ -46,7 +46,7 @@ export const getPages = async (): Promise<Page[]> => {
 }
 
 export const getPage = async (slug: string): Promise<Page> => {
-    return createClient(clientConfig).fetch(
+    return await createClient(clientConfig).fetch(
         groq`*[_type == "page" && slug.current == $slug][0]{
             _id,
             _createdAt,
