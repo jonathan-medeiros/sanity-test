@@ -24,8 +24,5 @@ const Page = async ({ params }: Props) => {
     )
 
 }
-
-export const revalidate = 10;
-
 export default Page;
 

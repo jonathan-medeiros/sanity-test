@@ -49,6 +49,4 @@ const Project = async ({ params }: Props) => {
     )
 }
 
-export const revalidate = 10;
-
 export default Project;

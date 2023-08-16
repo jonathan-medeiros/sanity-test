@@ -1,5 +1,6 @@
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
+import { vercelDeployTool } from 'sanity-plugin-vercel-deploy'
 import schemas from "./sanity/schemas";
 
 const config = defineConfig({
@@ -8,8 +9,8 @@ const config = defineConfig({
     title: "Marketplace Admin",
     apiVersion: "2023-08-15",
     basePath: '/admin',
-    plugins: [deskTool()],
-    schema: { types: schemas }
+    plugins: [deskTool(), vercelDeployTool()],
+    schema: { types: schemas },
 })
 
 export default config;

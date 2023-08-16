@@ -1,5 +1,4 @@
 import { getProjects } from "@/sanity/sanity-utils"
-import project from "@/sanity/schemas/project-schema";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -51,4 +50,3 @@ export default async function Home() {
         </div>
     );
 }
-export const revalidate = 10;
