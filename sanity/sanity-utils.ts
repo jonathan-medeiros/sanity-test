@@ -1,16 +1,11 @@
 import { Project } from "@/types/Project";
+import { Page } from "@/types/Page";
 import { createClient, groq } from "next-sanity";
-import { cache } from "react";
+import clientConfig from './config/client-config';
 
 export const getProjects = async (): Promise<Project[]> => {
-    const client = createClient({
-        projectId: "mm97wo51",
-        dataset: "production",
-        apiVersion: "2023-08-15",
-        useCdn: false
-    });
 
-    return client.fetch(
+    return createClient(clientConfig).fetch(
         groq`*[_type == "project"]{
             _id, 
             _createdAt,
@@ -21,16 +16,44 @@ export const getProjects = async (): Promise<Project[]> => {
             content
         }`
     );
+}
 
-    // return client.fetch(
-    //     groq`*[_type == "project"]{
-    //         _id, 
-    //         _createdAt,
-    //         name,
-    //         "slug": slug.current,
-    //         "image": image.asset->url,
-    //         url,
-    //         content
-    //     }`, { cache: 'no-store' }
-    // );
+export const getProject = async (slug: string): Promise<Project> => {
+    
+    return createClient(clientConfig).fetch(
+        groq`*[_type == "project" && slug.current == $slug][0]{
+            _id, 
+            _createdAt,
+            name,
+            "slug": slug.current,
+            "image": image.asset->url,
+            url,
+            content
+        }`,
+        { slug }
+    );
+}
+
+export const getPages = async (): Promise<Page[]> => {
+    return createClient(clientConfig).fetch(
+        groq`*[_type == "page"]{
+            _id,
+            _createdAt,
+            title,
+            "slug": slug.current
+        }`
+    )
+}
+
+export const getPage = async (slug: string): Promise<Page> => {
+    return createClient(clientConfig).fetch(
+        groq`*[_type == "page" && slug.current == $slug][0]{
+            _id,
+            _createdAt,
+            title,
+            "slug": slug.current,
+            content
+        }`,
+        { slug }
+    )    
 }
